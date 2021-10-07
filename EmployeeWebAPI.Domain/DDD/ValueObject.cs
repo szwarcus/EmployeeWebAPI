@@ -26,5 +26,14 @@ namespace EmployeeWebAPI.Domain.DDD
 
         public static bool operator ==(ValueObject<T> first, ValueObject<T> second) => Equals(first, second);
         public static bool operator !=(ValueObject<T> first, ValueObject<T> second) => !(first == second);
+
+        public override int GetHashCode()
+        {
+            var hash = 17;
+            foreach (var obj in this.GetEqualityComponents())
+                hash = hash * 31 + (obj == null ? 0 : obj.GetHashCode());
+
+            return hash;
+        }
     }
 }
