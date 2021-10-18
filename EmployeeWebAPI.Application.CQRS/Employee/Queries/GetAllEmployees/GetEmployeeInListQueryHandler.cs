@@ -5,7 +5,7 @@ using System.Text;
 namespace EmployeeWebAPI.Application.CQRS.Employee.Queries.GetAllEmployees
 {
     //TODO
-    public class Class1
+    public class GetEmployeeInListQueryHandler
     {
     }
 }

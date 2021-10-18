@@ -10,11 +10,16 @@ namespace EmployeeWebAPI.Domain.Entities
 {
     public class Employee : Entity<EmployeeId>
     {
-        public Name Name { get; }
-        public DateTime BirthDate { get; }
-        public Pesel Pesel { get; }
-        public RegistrationNumber RegistrationNumber { get; }
-        public Gender Gender { get; }
+        public Name Name { get; set; }
+        public DateTime BirthDate { get; set; }
+        public Pesel Pesel { get; set; }
+        public RegistrationNumber RegistrationNumber { get; set; }
+        public Gender Gender { get; set; }
+
+        public Employee()
+        {
+            RegistrationNumber = new RegistrationNumber();
+        }
 
         public Employee(Name name,
                         DateTime birthDate,
@@ -30,5 +35,7 @@ namespace EmployeeWebAPI.Domain.Entities
             RegistrationNumber = registrationNumber;
             Gender = gender;
         }
+
+
     }
 }

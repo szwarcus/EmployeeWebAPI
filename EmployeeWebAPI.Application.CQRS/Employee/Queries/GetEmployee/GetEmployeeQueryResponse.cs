@@ -5,7 +5,7 @@ using System.Text;
 namespace EmployeeWebAPI.Application.CQRS.Employee.Queries.GetEmployee
 {
     //TODO
-    public class EmployeesViewModel
+    public class GetEmployeeQueryResponse
     {
     }
 }
