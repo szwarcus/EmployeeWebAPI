@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EmployeeWebAPI.Application.Contracts.Persistence;
 using EmployeeWebAPI.Application.CQRS.Mapper.Dto;
+using EmployeeWebAPI.Domain.ValueObjects;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -31,11 +32,13 @@ namespace EmployeeWebAPI.Application.CQRS.Employee.Commands.CreateEmployee
             if (!validatorResult.IsValid)
                 return new CreateEmployeeCommandResponse(validatorResult);
 
-            var peselAlreadyExist = await _employeeRepository.PeselExists(request.Pesel);
+
+            var employeePesel = _mapper.Map<PeselDto, Pesel>(request.Pesel);
+            var peselAlreadyExist = await _employeeRepository.PeselExists(employeePesel);
 
             if(!peselAlreadyExist.Success && peselAlreadyExist.ReturnValue==true)
             {
-                return new CreateEmployeeCommandResponse(peselAlreadyExist.RemoveGeneric(),"Employee with this PESEL already exist");
+                return new CreateEmployeeCommandResponse(peselAlreadyExist.RemoveGeneric(), "CreateEmployeeCommandHandler - Employee with this PESEL already exist");
             }
 
             var employee = _mapper.Map<CreateEmployeeCommand,Domain.Entities.Employee>(request);
@@ -43,7 +46,7 @@ namespace EmployeeWebAPI.Application.CQRS.Employee.Commands.CreateEmployee
 
             if(!runAsync.Success)
             {
-                return new CreateEmployeeCommandResponse(runAsync.RemoveGeneric(), "");
+                return new CreateEmployeeCommandResponse(runAsync.RemoveGeneric(), "CreateEmployeeCommandHandler - add async error");
             }
 
             var employeeIdDto = _mapper.Map<IdDto>(runAsync.ReturnValue);

@@ -9,9 +9,9 @@ namespace EmployeeWebAPI.Application.Contracts.Persistence
     public interface IAsyncRepository<T> where T : class
     {
         Task<ExecutionStatus<IEnumerable<T>>> GetAllAsync();
-        Task<ExecutionStatus<T>> GetByIdAsync(int id);
+        Task<ExecutionStatus<T>> GetByIdAsync(Guid id);
 
-        Task<ExecutionStatus<int>> UpdateAsync(T entity);
-        Task<ExecutionStatus<int>> RemoveByIdAsync(int id);
+        Task<ExecutionStatus> UpdateAsync(T entity);
+        Task<ExecutionStatus> RemoveByIdAsync(Guid id);
     }
 }

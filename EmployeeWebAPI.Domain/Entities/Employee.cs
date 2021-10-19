@@ -18,7 +18,8 @@ namespace EmployeeWebAPI.Domain.Entities
 
         public Employee()
         {
-            RegistrationNumber = new RegistrationNumber();
+            if(RegistrationNumber==null)
+                RegistrationNumber = new RegistrationNumber();
         }
 
         public Employee(Name name,

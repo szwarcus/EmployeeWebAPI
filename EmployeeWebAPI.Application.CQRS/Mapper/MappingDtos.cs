@@ -14,14 +14,14 @@ namespace EmployeeWebAPI.Application.CQRS.Mapper
         {
             CreateMap<EmployeeId, IdDto>().ReverseMap();
             CreateMap<Domain.Entities.Employee, EmployeeDto>()
-                .ForMember(s => s.Id, o => o.MapFrom(k => k.Id.Value));
+                .ForMember(s => s.Id, o => o.MapFrom(k => k.Id.Value)).ReverseMap();
 
             CreateMap<EmployeeDto, Domain.Entities.Employee>()
-                .ForMember(s => s.Id, o => o.MapFrom(k => new EmployeeId(k.Id)));
+                .ForMember(s => s.Id, o => o.MapFrom(k => new EmployeeId(k.Id.Value))).ReverseMap();
 
             CreateMap<NameDto, Name>().ReverseMap();
             CreateMap<RegistrationNumberDto, RegistrationNumber>().ReverseMap();
-            CreateMap<Pesel, PeselDto>().ForMember(p=>p.Value, opt=>opt.MapFrom(src=>src.Value));
+            CreateMap<Pesel, PeselDto>().ForMember(p=>p.Value, opt=>opt.MapFrom(src=>src.Value)).ReverseMap();
 
         }
     }
