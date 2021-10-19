@@ -26,6 +26,7 @@ namespace EmployeeWebAPI.Application.CQRS.Employee.Commands.DeleteEmployee
         public async Task<DeleteEmployeeCommandResponse> Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
         {
             var employeeId = _mapper.Map<EmployeeId>(request.EmployeeId);
+
             var result =await _employeeRepository.RemoveByIdAsync(employeeId.Value);
 
             return new DeleteEmployeeCommandResponse(result,"DeleteEmployeeCommandHandler") ;

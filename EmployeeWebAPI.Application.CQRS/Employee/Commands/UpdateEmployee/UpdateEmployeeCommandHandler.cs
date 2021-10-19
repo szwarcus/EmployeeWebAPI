@@ -32,7 +32,7 @@ namespace EmployeeWebAPI.Application.CQRS.Employee.Commands.UpdateEmployee
 
 
             var employeeAsync = await _employeeRepository.GetByIdAsync(request.EmployeeId.Value);
-            if(employeeAsync.ReturnValue != null)
+            if(employeeAsync.Success)
             {
                 var employee = _mapper.Map<UpdateEmployeeCommand, Domain.Entities.Employee>(request);
                 var updateEmployee = await _employeeRepository.UpdateAsync(employee);
