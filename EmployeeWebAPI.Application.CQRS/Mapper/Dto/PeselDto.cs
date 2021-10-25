@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EmployeeWebAPI.Application.CQRS.Mapper.Dto
+﻿namespace EmployeeWebAPI.Application.CQRS.Mapper.Dto
 {
     public class PeselDto
     {

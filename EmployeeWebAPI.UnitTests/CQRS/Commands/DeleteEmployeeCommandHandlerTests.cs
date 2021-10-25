@@ -43,10 +43,7 @@ namespace EmployeeWebAPI.UnitTests.CQRS.Commands
             //arrange
             var command = new DeleteEmployeeCommand()
             {
-                EmployeeId = new Application.CQRS.Mapper.Dto.IdDto()
-                {
-                    Value = guid
-                }
+                EmployeeId = new Domain.ValueObjects.Ids.EmployeeId(guid)
             };
             _employeeRepositoryMock.Setup(x => x.RemoveByIdAsync(It.Is<Guid>(y => y == guid))).ReturnsAsync(new ExecutionStatus()
             {
@@ -69,10 +66,7 @@ namespace EmployeeWebAPI.UnitTests.CQRS.Commands
             //arrange
             var command = new DeleteEmployeeCommand()
             {
-                EmployeeId = new Application.CQRS.Mapper.Dto.IdDto()
-                {
-                    Value = guid
-                }
+                EmployeeId = new Domain.ValueObjects.Ids.EmployeeId(guid)
             };
             _employeeRepositoryMock.Setup(x => x.RemoveByIdAsync(It.Is<Guid>(y => y == guid))).ReturnsAsync(new ExecutionStatus()
             {
@@ -95,10 +89,8 @@ namespace EmployeeWebAPI.UnitTests.CQRS.Commands
             //arrange
             var command = new DeleteEmployeeCommand()
             {
-                EmployeeId = new Application.CQRS.Mapper.Dto.IdDto()
-                {
-                    Value = guid
-                }
+                EmployeeId = new Domain.ValueObjects.Ids.EmployeeId(guid)
+                
             };
             _employeeRepositoryMock.Setup(x => x.RemoveByIdAsync(It.Is<Guid>(y => y == guid))).ReturnsAsync(new ExecutionStatus()
             {

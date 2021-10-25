@@ -3,8 +3,6 @@ using EmployeeWebAPI.Domain.Enums;
 using EmployeeWebAPI.Domain.ValueObjects;
 using EmployeeWebAPI.Domain.ValueObjects.Ids;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EmployeeWebAPI.Domain.Entities
 {

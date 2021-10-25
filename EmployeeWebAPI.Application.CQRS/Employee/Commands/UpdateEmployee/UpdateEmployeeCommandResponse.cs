@@ -1,13 +1,10 @@
 ﻿using EmployeeWebAPI.Application.Common;
 using EmployeeWebAPI.Domain.Status;
 using FluentValidation.Results;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EmployeeWebAPI.Application.CQRS.Employee.Commands.UpdateEmployee
 {
-    
+
     public class UpdateEmployeeCommandResponse : BaseResponse
     {
         public UpdateEmployeeCommandResponse() : base()

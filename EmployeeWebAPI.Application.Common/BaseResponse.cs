@@ -2,7 +2,6 @@
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace EmployeeWebAPI.Application.Common
 {

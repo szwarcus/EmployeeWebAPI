@@ -1,8 +1,5 @@
 ﻿using EmployeeWebAPI.Application.CQRS.Mapper.Dto;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EmployeeWebAPI.Application.CQRS.Employee.Validations.Rules
 {
