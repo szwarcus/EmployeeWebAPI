@@ -7,9 +7,12 @@ namespace EmployeeWebAPI.Domain.ValueObjects.Ids
     public class EmployeeId : BaseId<EmployeeId>
     {
 
-        public int Value { get; set; }
-
-        public EmployeeId(int value)
+        public Guid Value { get; set; }
+        public EmployeeId()
+        {
+            Value = Guid.NewGuid();
+        }
+        public EmployeeId(Guid value)
         {
             Value = value;
         }
@@ -19,6 +22,11 @@ namespace EmployeeWebAPI.Domain.ValueObjects.Ids
             yield return Value;
         }
 
-        
+        public static EmployeeId NewUniqueId()
+        {
+            return new EmployeeId();
+        }
+
+
     }
 }
