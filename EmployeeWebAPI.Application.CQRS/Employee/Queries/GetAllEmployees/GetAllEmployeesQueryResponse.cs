@@ -1,11 +1,9 @@
 ﻿using EmployeeWebAPI.Application.Common;
 using EmployeeWebAPI.Domain.Status;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace EmployeeWebAPI.Application.CQRS.Employee.Queries.GetAllEmployees
-{ 
+{
     public class GetAllEmployeesQueryResponse : BaseResponse
     {
         public List<EmployeesInListViewModel> EmployeeList { get; }

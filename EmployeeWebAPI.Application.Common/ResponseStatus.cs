@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EmployeeWebAPI.Application.Common
+﻿namespace EmployeeWebAPI.Application.Common
 {
     public enum ResponseStatus
     {

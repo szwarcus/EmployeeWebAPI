@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using EmployeeWebAPI.Application.Contracts.Persistence;
 using EmployeeWebAPI.Application.CQRS.Employee.Queries.GetAllEmployees;
-using EmployeeWebAPI.Application.CQRS.Employee.Queries.GetEmployee;
 using EmployeeWebAPI.Application.CQRS.Mapper;
-using EmployeeWebAPI.Application.CQRS.Mapper.Dto;
 using EmployeeWebAPI.Domain.Entities;
 using EmployeeWebAPI.Domain.Enums;
 using EmployeeWebAPI.Domain.Factories;

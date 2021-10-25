@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EmployeeWebAPI.Domain.Status
+﻿namespace EmployeeWebAPI.Domain.Status
 {
     public enum Source
     {

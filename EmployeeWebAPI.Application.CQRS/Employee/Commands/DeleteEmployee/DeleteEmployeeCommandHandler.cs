@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using EmployeeWebAPI.Application.Contracts.Persistence;
-using EmployeeWebAPI.Domain.Status;
 using EmployeeWebAPI.Domain.ValueObjects.Ids;
 using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
