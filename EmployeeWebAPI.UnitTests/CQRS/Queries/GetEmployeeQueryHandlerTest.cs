@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace EmployeeWebAPI.UnitTests.CQRS.Queries
 {
     [TestFixture]
-    public class GetEmployeeQueryHandlerTest 
+    public class GetEmployeeQueryHandlerTest
     {
         private IMapper _mapper;
         private GetEmployeeQueryHandler _getEmployeeQueryHandler;
@@ -56,7 +56,7 @@ namespace EmployeeWebAPI.UnitTests.CQRS.Queries
                 Success = true,
                 Reason = Reason.None,
                 ReturnValue = employee
-            });    
+            });
 
             //act
             var response = await _getEmployeeQueryHandler.Handle(query, new System.Threading.CancellationToken());

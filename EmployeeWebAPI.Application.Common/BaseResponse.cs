@@ -21,7 +21,7 @@ namespace EmployeeWebAPI.Application.Common
             Success = true;
         }
 
-        protected BaseResponse(ExecutionStatus status, string message)
+        protected BaseResponse(ExecutionStatus status, string message=null)
         {
             Errors = new List<string>();
             if (!status.Success)

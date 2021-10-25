@@ -11,7 +11,7 @@ namespace EmployeeWebAPI.Application.Contracts.Persistence
 {
     public interface IEmployeeRepository : IAsyncRepository<Employee>
     {
-        Task<ExecutionStatus<bool>> PeselExists(Pesel pesel);
+        Task<ExecutionStatus<bool>> PeselExists(Pesel  pesel);
 
         Task<ExecutionStatus<EmployeeId>> AddAsync(Employee entity);
     }

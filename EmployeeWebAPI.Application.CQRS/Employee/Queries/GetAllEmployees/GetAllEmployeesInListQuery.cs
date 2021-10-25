@@ -1,11 +1,12 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace EmployeeWebAPI.Application.CQRS.Employee.Queries.GetAllEmployees
 {
-    //TODO
-    public class GetEmployeeInListQuery
+
+    public class GetAllEmployeesInListQuery : IRequest<GetAllEmployeesQueryResponse>
     {
     }
 }
