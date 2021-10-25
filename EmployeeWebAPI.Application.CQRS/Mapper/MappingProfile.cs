@@ -1,7 +1,4 @@
 ﻿using EmployeeWebAPI.Application.CQRS.Employee.Commands.CreateEmployee;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using AutoMapper;
 using EmployeeWebAPI.Application.CQRS.Mapper.Dto;
 using EmployeeWebAPI.Application.CQRS.Employee.Commands.UpdateEmployee;

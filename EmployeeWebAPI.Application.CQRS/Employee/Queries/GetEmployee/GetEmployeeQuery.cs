@@ -1,14 +1,11 @@
-﻿using EmployeeWebAPI.Application.CQRS.Mapper.Dto;
+﻿using EmployeeWebAPI.Domain.ValueObjects.Ids;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EmployeeWebAPI.Application.CQRS.Employee.Queries.GetEmployee
 {
-    //TODO
+
     public class GetEmployeeQuery : IRequest<GetEmployeeQueryResponse>
     {
-        public IdDto EmployeeId { get; set; }
+        public EmployeeId EmployeeId { get; set; }
     }
 }

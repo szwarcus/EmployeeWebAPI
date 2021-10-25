@@ -2,9 +2,6 @@
 using EmployeeWebAPI.Application.CQRS.Mapper.Dto;
 using EmployeeWebAPI.Domain.ValueObjects;
 using EmployeeWebAPI.Domain.ValueObjects.Ids;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EmployeeWebAPI.Application.CQRS.Mapper
 {

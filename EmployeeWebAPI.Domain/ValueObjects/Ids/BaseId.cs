@@ -1,7 +1,4 @@
 ﻿using EmployeeWebAPI.Domain.DDD;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EmployeeWebAPI.Domain.ValueObjects.Ids
 {

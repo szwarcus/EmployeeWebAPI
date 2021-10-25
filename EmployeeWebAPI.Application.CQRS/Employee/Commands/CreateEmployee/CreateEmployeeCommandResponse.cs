@@ -1,11 +1,7 @@
 ﻿using EmployeeWebAPI.Application.Common;
 using EmployeeWebAPI.Application.CQRS.Mapper.Dto;
 using EmployeeWebAPI.Domain.Status;
-using EmployeeWebAPI.Domain.ValueObjects.Ids;
 using FluentValidation.Results;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EmployeeWebAPI.Application.CQRS.Employee.Commands.CreateEmployee
 {
