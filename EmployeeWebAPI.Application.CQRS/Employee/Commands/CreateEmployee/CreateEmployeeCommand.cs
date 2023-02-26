@@ -1,5 +1,5 @@
 ﻿using System;
-using EmployeeWebAPI.Application.CQRS.Mapper.Dto;
+using EmployeeWebAPI.Application.CQRS.Dto;
 using EmployeeWebAPI.Domain.Enums;
 using MediatR;
 

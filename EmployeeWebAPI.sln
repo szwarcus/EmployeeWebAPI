@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30709.132
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeWebAPI.Api", "EmployeeWebAPI.Api\EmployeeWebAPI.Api.csproj", "{839027A1-68D6-40BC-9DE3-AF62E8034769}"
 EndProject
@@ -17,8 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{FD1DCAFC-A0B5-4F0B-A453-DB8A49A729A1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastracture", "Infrastracture", "{E04E2791-5A9E-485E-AC99-46E800D5816C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeWebAPI.Domain", "EmployeeWebAPI.Domain\EmployeeWebAPI.Domain.csproj", "{FE30D043-20B8-4EC5-BBE5-C409D4C52CF7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeWebAPI.Application.CQRS", "EmployeeWebAPI.Application.CQRS\EmployeeWebAPI.Application.CQRS.csproj", "{C4FA967A-D0A6-40EE-8A2F-21F7C0C27B0B}"
@@ -27,7 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeWebAPI.Application.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeWebAPI.Application.Contracts", "EmployeeWebAPI.Application.Contracts\EmployeeWebAPI.Application.Contracts.csproj", "{582B9D80-75F0-4B31-A8C8-300C6909CC8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeWebAPI.UnitTests", "EmployeeWebAPI.UnitTests\EmployeeWebAPI.UnitTests.csproj", "{9C593D65-80E3-4B75-9B7C-23D96461C27F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeWebAPI.UnitTests", "EmployeeWebAPI.UnitTests\EmployeeWebAPI.UnitTests.csproj", "{9C593D65-80E3-4B75-9B7C-23D96461C27F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeWebApi.Infrastracture", "EmployeeWebApi.Infrastracture\EmployeeWebApi.Infrastracture.csproj", "{8A136885-6CDD-4E7B-BFF7-40E094DAFD5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +59,10 @@ Global
 		{9C593D65-80E3-4B75-9B7C-23D96461C27F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C593D65-80E3-4B75-9B7C-23D96461C27F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C593D65-80E3-4B75-9B7C-23D96461C27F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A136885-6CDD-4E7B-BFF7-40E094DAFD5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A136885-6CDD-4E7B-BFF7-40E094DAFD5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A136885-6CDD-4E7B-BFF7-40E094DAFD5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A136885-6CDD-4E7B-BFF7-40E094DAFD5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,12 +73,12 @@ Global
 		{A7FA72FE-E0D1-4A9C-BA7F-DC71EB3A83C6} = {FB2C42F7-F22A-47C2-910E-2115EFC48437}
 		{242F95A8-061E-4F56-B326-5558E2A342E8} = {A7FA72FE-E0D1-4A9C-BA7F-DC71EB3A83C6}
 		{FD1DCAFC-A0B5-4F0B-A453-DB8A49A729A1} = {A7FA72FE-E0D1-4A9C-BA7F-DC71EB3A83C6}
-		{E04E2791-5A9E-485E-AC99-46E800D5816C} = {FB2C42F7-F22A-47C2-910E-2115EFC48437}
 		{FE30D043-20B8-4EC5-BBE5-C409D4C52CF7} = {FD1DCAFC-A0B5-4F0B-A453-DB8A49A729A1}
 		{C4FA967A-D0A6-40EE-8A2F-21F7C0C27B0B} = {242F95A8-061E-4F56-B326-5558E2A342E8}
 		{FF07703D-84E7-4EB3-BF9B-B389D7278175} = {242F95A8-061E-4F56-B326-5558E2A342E8}
 		{582B9D80-75F0-4B31-A8C8-300C6909CC8C} = {242F95A8-061E-4F56-B326-5558E2A342E8}
 		{9C593D65-80E3-4B75-9B7C-23D96461C27F} = {22505D8C-5FA0-461F-87F0-44436DAC2657}
+		{8A136885-6CDD-4E7B-BFF7-40E094DAFD5E} = {A7FA72FE-E0D1-4A9C-BA7F-DC71EB3A83C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {737A1563-D6B2-4005-A78B-3CA5C065681C}

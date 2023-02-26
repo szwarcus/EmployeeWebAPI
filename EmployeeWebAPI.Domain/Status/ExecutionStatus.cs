@@ -19,7 +19,7 @@ namespace EmployeeWebAPI.Domain.Status
             };
         }
 
-        public static ExecutionStatus ErrorLogic(string message, Exception ex)
+        public static ExecutionStatus ErrorLogic(string message, Exception ex=null)
         {
             return new ExecutionStatus()
             {
@@ -40,7 +40,7 @@ namespace EmployeeWebAPI.Domain.Status
             };
         }
 
-        public static ExecutionStatus ErrorDatabaseRecordNotFound(string message, Exception ex)
+        public static ExecutionStatus ErrorDatabaseRecordNotFound(string message, Exception ex = null)
         {
             return new ExecutionStatus()
             {
@@ -95,7 +95,7 @@ namespace EmployeeWebAPI.Domain.Status
             };
         }
 
-        public static ExecutionStatus<T> ErrorLogic(string message, Exception ex)
+        public static ExecutionStatus<T> ErrorLogic(string message, Exception ex=null)
         {
             return new ExecutionStatus<T>()
             {

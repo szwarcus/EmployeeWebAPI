@@ -6,6 +6,7 @@
         Error,
         UnhandledException,
         NotFoundInDb,
-        DuplicatedUniqueId
+        DuplicatedUniqueId,
+        InvalidQuery
     }
 }

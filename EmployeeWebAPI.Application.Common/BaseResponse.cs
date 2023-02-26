@@ -26,18 +26,10 @@ namespace EmployeeWebAPI.Application.Common
             if (!status.Success)
             {
                 Success = false;
-                if (status.Source == Source.ApplicationLogic)
-                    Status = ResponseStatus.BusinessLogicError;
-                if (status.Source == Source.Database)
-                    Status = ResponseStatus.DatabaseError;
-                if (status.Source == Source.Database
-                    && status.Reason == Reason.NotFoundInDb)
-                    Status = ResponseStatus.NotFound;
-                if (status.Source == Source.Database
-                    && status.Reason == Reason.DuplicatedUniqueId)
-                    Status = ResponseStatus.InvalidQuery;
 
-                    Message = message;
+                ComputeStatus(status);
+
+                Message = message;
                 Message += status.Message;
             }
             else
@@ -46,6 +38,19 @@ namespace EmployeeWebAPI.Application.Common
                 Status = ResponseStatus.Success;
             }
         }
+
+        private void ComputeStatus(ExecutionStatus status)
+        {
+            Status = (status.Source, status.Reason) switch
+            {
+                (Source.ApplicationLogic, _) => ResponseStatus.BusinessLogicError,
+                (Source.Database, Reason.DuplicatedUniqueId) => ResponseStatus.InvalidQuery,
+                (Source.Database, Reason.NotFoundInDb) => ResponseStatus.NotFound,
+                (Source.Database, Reason.Error) => ResponseStatus.BusinessLogicError,
+                _ => throw new NotImplementedException(),
+            };
+        }
+
         protected BaseResponse(string message = null)
         {
             Errors = new List<string>();
@@ -83,7 +88,5 @@ namespace EmployeeWebAPI.Application.Common
             else
                 Status = ResponseStatus.Success;
         }
-
-
     }
 }

@@ -1,4 +1,4 @@
-﻿using EmployeeWebAPI.Application.CQRS.Mapper.Dto;
+﻿using EmployeeWebAPI.Application.CQRS.Dto;
 using EmployeeWebAPI.Domain.Enums;
 using System;
 
@@ -6,7 +6,7 @@ namespace EmployeeWebAPI.Application.CQRS.Employee.Queries.GetEmployee
 {
     public class EmployeeViewModel
     {
-        public IdDto EmployeeId { get; set; }
+        public Guid EmployeeId { get; set; }
         public NameDto Name { get; set; }
         public PeselDto Pesel { get; set; }
         public Gender Gender { get; set; }

@@ -16,8 +16,5 @@ namespace EmployeeWebAPI.Application.CQRS.Employee.Commands.CreateEmployee
                 .NotNull()
                 .SetValidator(new PeselRule());
         }
-
-     
-      
     }
 }

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using EmployeeWebAPI.Application.CQRS.Mapper.Dto;
+using EmployeeWebAPI.Application.CQRS.Dto;
 using EmployeeWebAPI.Domain.ValueObjects;
-using EmployeeWebAPI.Domain.ValueObjects.Ids;
 
 namespace EmployeeWebAPI.Application.CQRS.Mapper
 {
@@ -9,12 +8,11 @@ namespace EmployeeWebAPI.Application.CQRS.Mapper
     {
         public MappingDtos()
         {
-            CreateMap<EmployeeId, IdDto>().ReverseMap();
             CreateMap<Domain.Entities.Employee, EmployeeDto>()
-                .ForMember(s => s.Id, o => o.MapFrom(k => k.Id.Value)).ReverseMap();
+                .ForMember(s => s.Id, o => o.MapFrom(k => k.Id)).ReverseMap();
 
             CreateMap<EmployeeDto, Domain.Entities.Employee>()
-                .ForMember(s => s.Id, o => o.MapFrom(k => new EmployeeId(k.Id.Value))).ReverseMap();
+                .ForMember(s => s.Id, o => o.MapFrom(k => k.Id)).ReverseMap();
 
             CreateMap<NameDto, Name>().ReverseMap();
             CreateMap<RegistrationNumberDto, RegistrationNumber>().ReverseMap();

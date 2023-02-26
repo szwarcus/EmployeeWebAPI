@@ -49,20 +49,18 @@ namespace EmployeeWebAPI.UnitTests.CQRS.Queries
             {
                 mc.AddProfile(new MappingProfile());
                 mc.AddProfile(new MappingDtos());
+                mc.AddProfile(new MappingIds());
             });
             IMapper mapper = mappingConfig.CreateMapper();
             _mapper = mapper;
-         
-
             _getAllEmployeesInListQueryHandler = new GetAllEmployeesInListQueryHandler(_employeeRepositoryMock.Object, _mapper);
         }
 
         [Test]
         public async Task GetAllEmployeeExecutionTest()
         {
-
             //arrange
-            _employeeRepositoryMock.Setup(x => x.GetAllAsync()).ReturnsAsync(new ExecutionStatus<IEnumerable<Employee>>()
+            _employeeRepositoryMock.Setup(x => x.List()).ReturnsAsync(new ExecutionStatus<IEnumerable<Employee>>()
             {
                 Source = Source.Database,
                 Success = true,
@@ -74,14 +72,14 @@ namespace EmployeeWebAPI.UnitTests.CQRS.Queries
             var response = await _getAllEmployeesInListQueryHandler.Handle(_query, new System.Threading.CancellationToken());
 
             //assert
-            _employeeRepositoryMock.Verify(x => x.GetAllAsync(), Times.Once);
+            _employeeRepositoryMock.Verify(x => x.List(), Times.Once);
         }
 
         [Test]
         public async Task GetAllEmployeesWithSuccessTest()
         {
             //arrange
-            _employeeRepositoryMock.Setup(x => x.GetAllAsync()).ReturnsAsync(new ExecutionStatus<IEnumerable<Employee>>()
+            _employeeRepositoryMock.Setup(x => x.List()).ReturnsAsync(new ExecutionStatus<IEnumerable<Employee>>()
             {
                 Source = Source.Database,
                 Success = true,
@@ -102,7 +100,7 @@ namespace EmployeeWebAPI.UnitTests.CQRS.Queries
         public async Task GetAllEmployeesWithDBFailureTest()
         {
             //arrange
-            _employeeRepositoryMock.Setup(x => x.GetAllAsync()).ReturnsAsync(new ExecutionStatus<IEnumerable<Employee>>()
+            _employeeRepositoryMock.Setup(x => x.List()).ReturnsAsync(new ExecutionStatus<IEnumerable<Employee>>()
             {
                 Source = Source.Database,
                 Success = false,
