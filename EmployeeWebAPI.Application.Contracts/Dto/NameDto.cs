@@ -1,4 +1,4 @@
-﻿namespace EmployeeWebAPI.Application.CQRS.Mapper.Dto
+﻿namespace EmployeeWebAPI.Application.CQRS.Dto
 {
     public class NameDto
     {

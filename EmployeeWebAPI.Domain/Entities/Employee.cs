@@ -8,24 +8,28 @@ namespace EmployeeWebAPI.Domain.Entities
 {
     public class Employee : Entity<EmployeeId>
     {
-        public Name Name { get; set; }
-        public DateTime BirthDate { get; set; }
-        public Pesel Pesel { get; set; }
-        public RegistrationNumber RegistrationNumber { get; set; }
-        public Gender Gender { get; set; }
+        public Name Name { get; private set; }
+
+        public DateTime BirthDate { get; private set; }
+
+        public Pesel Pesel { get; private set; }
+
+        public RegistrationNumber RegistrationNumber { get; private set; }
+
+        public Gender Gender { get; private set; }
 
         public Employee()
         {
-            if(RegistrationNumber==null)
-                RegistrationNumber = new RegistrationNumber();
+            RegistrationNumber ??= new RegistrationNumber();
+            Id = EmployeeId.NewUniqueId();
         }
 
         public Employee(Name name,
-                        DateTime birthDate,
-                        Pesel pesel,
-                        RegistrationNumber registrationNumber,
-                        Gender gender,
-                        EmployeeId employeeId)
+            DateTime birthDate,
+            Pesel pesel,
+            RegistrationNumber registrationNumber,
+            Gender gender,
+            EmployeeId employeeId)
         {
             Id = employeeId;
             Name = name;
@@ -35,6 +39,13 @@ namespace EmployeeWebAPI.Domain.Entities
             Gender = gender;
         }
 
-
+        public void UpdateData(Employee employee)
+        {
+            Id = employee.Id;
+            Name = employee.Name;
+            BirthDate = employee.BirthDate;
+            Pesel = employee.Pesel;
+            Gender = employee.Gender;
+        }
     }
 }

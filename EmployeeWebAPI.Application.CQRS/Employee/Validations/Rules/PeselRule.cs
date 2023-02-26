@@ -1,4 +1,4 @@
-﻿using EmployeeWebAPI.Application.CQRS.Mapper.Dto;
+﻿using EmployeeWebAPI.Application.CQRS.Dto;
 using FluentValidation;
 
 namespace EmployeeWebAPI.Application.CQRS.Employee.Validations.Rules
@@ -9,12 +9,11 @@ namespace EmployeeWebAPI.Application.CQRS.Employee.Validations.Rules
         {
             RuleFor(c => c.Value)
                .Length(11)
-               .WithMessage("{PropertyName} length should be exactly 11 char long!}");
+               .WithMessage("Pesel length should be exactly 11 char long!");
 
             RuleFor(c =>c.Value)
                 .Must(x => ValidatePesel(x))
-                .WithMessage("{PropertyName} is incorrect!");
-
+                .WithMessage("Pesel is incorrect!");
         }
 
         private static bool ValidatePesel(string input)

@@ -1,12 +1,10 @@
-﻿
-using EmployeeWebAPI.Domain.ValueObjects.Ids;
+﻿using EmployeeWebAPI.Domain.ValueObjects.Ids;
 using MediatR;
-
 
 namespace EmployeeWebAPI.Application.CQRS.Employee.Commands.DeleteEmployee
 {
     public class DeleteEmployeeCommand : IRequest<DeleteEmployeeCommandResponse>
     {
-        public EmployeeId EmployeeId { get; set; }
+        public EmployeeId Id { get; set; }
     }
 }

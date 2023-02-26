@@ -7,12 +7,7 @@ namespace EmployeeWebAPI.Domain.ValueObjects
     {
         public string Value { get; private set; }
 
-        public Pesel(string value)
-        {
-            //if (string.IsNullOrEmpty(value) || value.Length != 11)
-            //    throw new ArgumentException("Pesel should be 11 char long and cannot be empty");
-            Value = value;
-        }
+        public Pesel(string value) => Value = value;
         
         protected override IEnumerable<object> GetEqualityComponents()
         {

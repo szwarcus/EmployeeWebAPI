@@ -17,23 +17,19 @@ namespace EmployeeWebAPI.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeeController : Controller
+    public class EmployeesController : Controller
     {
-
         private readonly IMediator _mediator;
 
-        public EmployeeController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+        public EmployeesController(IMediator mediator) => _mediator = mediator; 
 
-        [HttpPost(Name = "addemployee")]
+        [HttpPost(Name = "Add")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<EmployeeId>> Create([FromBody] CreateEmployeeRequest employee)
+        public async Task<ActionResult<Guid>> Create([FromBody] CreateEmployeeRequest employee)
         {
-            CreateEmployeeCommand c = new CreateEmployeeCommand()
+            var command = new CreateEmployeeCommand()
             {
                 BirthDate=employee.BirthDate,
                 Name=employee.Name,
@@ -41,16 +37,14 @@ namespace EmployeeWebAPI.Api.Controllers
                 Pesel=employee.Pesel
             };
 
-            var result = await _mediator.Send(c);
+            var result = await _mediator.Send(command);
 
-    
-            if (result.Status == ResponseStatus.NotFound)
-                return NotFound(result.Message);
-            if (result.Status == ResponseStatus.BusinessLogicError|| result.Status == ResponseStatus.InvalidQuery)
-                return BadRequest(result.Message);
-
-
-            return Ok(result.EmployeeId);
+            return result.Status switch
+            {
+                ResponseStatus.NotFound => NotFound(result),
+                ResponseStatus.BusinessLogicError or ResponseStatus.InvalidQuery or ResponseStatus.DatabaseError => BadRequest(result),
+                _ => Ok(result),
+            };
         }
 
         [HttpPut("{id}",Name = "Update")]
@@ -58,28 +52,26 @@ namespace EmployeeWebAPI.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult> Update([FromBody] UpdateEmployeeRequest employee)
+        public async Task<ActionResult> Update([FromBody] UpdateEmployeeRequest employee, Guid id)
         {
-            UpdateEmployeeCommand updateEmployee = new UpdateEmployeeCommand()
+            var employeeId = new EmployeeId(id);
+            var command = new UpdateEmployeeCommand()
             {
-                EmployeeId=employee.EmployeeId,
+                EmployeeId=employeeId,
                 BirthDate=employee.BirthDate,
                 Gender=employee.Gender,
                 Name=employee.Name,
                 Pesel=employee.Pesel,
-                RegistrationNumber=employee.RegistrationNumber
             };
 
-            var result = await _mediator.Send(updateEmployee);
+            var result = await _mediator.Send(command);
 
-
-            if (result.Status == ResponseStatus.NotFound)
-                return NotFound(result.Message);
-            if (result.Status == ResponseStatus.BusinessLogicError)
-                return BadRequest(result.Message);
-
-
-            return NoContent();
+            return result.Status switch
+            {
+                ResponseStatus.NotFound => NotFound(result),
+                ResponseStatus.BusinessLogicError => BadRequest(result),
+                _ => NoContent(),
+            };
         }
 
         [HttpDelete("{id}", Name = "Delete")]
@@ -88,15 +80,16 @@ namespace EmployeeWebAPI.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<ActionResult> Delete(Guid id)
         {
+            var employeeId = new EmployeeId(id);
             var deleteCommand = new DeleteEmployeeCommand()
             {
-                EmployeeId = new EmployeeId(id)
+                Id =  employeeId
             };
 
             var result = await _mediator.Send(deleteCommand);
 
             if (result.Status == ResponseStatus.NotFound)
-                return NotFound(result.Message);
+                return NotFound(result);
 
             return NoContent();
         }
@@ -110,26 +103,26 @@ namespace EmployeeWebAPI.Api.Controllers
         {
             var result = await _mediator.Send(new GetAllEmployeesInListQuery());
 
-
             if (result.Status == ResponseStatus.NotFound)
                 return NotFound(result.Message);
 
-            return Ok(result.EmployeeList);
+            return Ok(result);
         }
 
         [HttpGet("{id}", Name = "GetEmployee")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult<EmployeeViewModel>> GetEmployee(Guid uid)
+        public async Task<ActionResult<EmployeeViewModel>> GetEmployee([FromRoute] Guid id)
         {
-            var result = await _mediator.Send
-                (new GetEmployeeQuery() { EmployeeId = new EmployeeId(uid) });
+            var employeeId = new EmployeeId(id);
+            var query = new GetEmployeeQuery() { Id = employeeId };
+            var result = await _mediator.Send(query);
 
             if (result.Status == ResponseStatus.NotFound)
                 return NotFound(result.Message);
 
-            return Ok(result.Employee);
+            return Ok(result);
         }
     }
 }

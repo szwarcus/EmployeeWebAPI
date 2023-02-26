@@ -1,5 +1,5 @@
 ﻿
-using EmployeeWebAPI.Application.CQRS.Mapper.Dto;
+using EmployeeWebAPI.Application.CQRS.Dto;
 using FluentValidation;
 
 namespace EmployeeWebAPI.Application.CQRS.Employee.Validations.Rules

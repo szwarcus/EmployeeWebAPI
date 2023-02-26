@@ -1,16 +1,16 @@
 ﻿using EmployeeWebAPI.Application.Common;
-using EmployeeWebAPI.Application.CQRS.Mapper.Dto;
 using EmployeeWebAPI.Domain.Status;
+using EmployeeWebAPI.Domain.ValueObjects.Ids;
 using FluentValidation.Results;
 
 namespace EmployeeWebAPI.Application.CQRS.Employee.Commands.CreateEmployee
 {
     public class CreateEmployeeCommandResponse : BaseResponse
     {
-        public IdDto EmployeeId { get; set; }
+        public EmployeeId EmployeeId { get; set; }
 
 
-        public CreateEmployeeCommandResponse(ExecutionStatus status, string message) : base(status, message)
+        public CreateEmployeeCommandResponse(ExecutionStatus status, string message=null) : base(status, message)
         {
 
         }
@@ -20,9 +20,9 @@ namespace EmployeeWebAPI.Application.CQRS.Employee.Commands.CreateEmployee
         { }
 
 
-        public CreateEmployeeCommandResponse(IdDto employeeIdDto) : base()
+        public CreateEmployeeCommandResponse(EmployeeId employeeId) : base()
         {
-            EmployeeId = employeeIdDto;
+            EmployeeId = employeeId;
         }
     }
 }

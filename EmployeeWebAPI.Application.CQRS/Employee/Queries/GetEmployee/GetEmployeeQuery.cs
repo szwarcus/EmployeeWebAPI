@@ -3,9 +3,8 @@ using MediatR;
 
 namespace EmployeeWebAPI.Application.CQRS.Employee.Queries.GetEmployee
 {
-
     public class GetEmployeeQuery : IRequest<GetEmployeeQueryResponse>
     {
-        public EmployeeId EmployeeId { get; set; }
+        public EmployeeId Id { get; set; }
     }
 }

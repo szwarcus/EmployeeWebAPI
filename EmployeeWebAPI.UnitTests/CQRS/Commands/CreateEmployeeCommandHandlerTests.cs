@@ -1,8 +1,8 @@
 using AutoMapper;
 using EmployeeWebAPI.Application.Contracts.Persistence;
+using EmployeeWebAPI.Application.CQRS.Dto;
 using EmployeeWebAPI.Application.CQRS.Employee.Commands.CreateEmployee;
 using EmployeeWebAPI.Application.CQRS.Mapper;
-using EmployeeWebAPI.Application.CQRS.Mapper.Dto;
 using EmployeeWebAPI.Domain.Entities;
 using EmployeeWebAPI.Domain.Enums;
 using EmployeeWebAPI.Domain.Status;
@@ -68,9 +68,9 @@ namespace EmployeeWebAPI.UnitTests.CQRS.Commands
                     Reason = Reason.None
                 });
 
-            _employeeRepositoryMock.Setup(x => x.AddAsync(It.IsAny<Employee>())).ReturnsAsync(new ExecutionStatus<EmployeeId>()
+            _employeeRepositoryMock.Setup(x => x.Add(It.IsAny<Employee>())).ReturnsAsync(new ExecutionStatus<EmployeeId>()
             {
-                ReturnValue = new EmployeeId(),
+                ReturnValue = EmployeeId.NewUniqueId(),
                 Source = Source.Database,
                 Success = true,
                 Reason = Reason.None
@@ -82,7 +82,7 @@ namespace EmployeeWebAPI.UnitTests.CQRS.Commands
 
             //assert
             _employeeRepositoryMock.Verify(x => x.PeselExists(pesel), Times.Once);
-            _employeeRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Employee>()), Times.Once);
+            _employeeRepositoryMock.Verify(x => x.Add(It.IsAny<Employee>()), Times.Once);
         }
 
         [Test]
@@ -103,6 +103,7 @@ namespace EmployeeWebAPI.UnitTests.CQRS.Commands
                 },
                 BirthDate = new System.DateTime(1975, 08, 04),
             };
+
             var pesel = _mapper.Map<PeselDto, Pesel>(command.Pesel);
             _employeeRepositoryMock
                 .Setup(x => x.PeselExists(It.Is<Pesel>(x => x == pesel)))
@@ -114,9 +115,9 @@ namespace EmployeeWebAPI.UnitTests.CQRS.Commands
                     Reason = Reason.None
                 });
 
-            _employeeRepositoryMock.Setup(x => x.AddAsync(It.IsAny<Employee>())).ReturnsAsync(new ExecutionStatus<EmployeeId>()
+            _employeeRepositoryMock.Setup(x => x.Add(It.IsAny<Employee>())).ReturnsAsync(new ExecutionStatus<EmployeeId>()
             {
-                ReturnValue = new EmployeeId(),
+                ReturnValue = EmployeeId.NewUniqueId(),
                 Source = Source.Database,
                 Success = true,
                 Reason = Reason.None
@@ -155,7 +156,7 @@ namespace EmployeeWebAPI.UnitTests.CQRS.Commands
                 .ReturnsAsync(new ExecutionStatus<bool>() {
                     ReturnValue = true,
                     Source=Source.Database,
-                    Success=false,
+                    Success=true,
                     Reason=Reason.DuplicatedUniqueId
                 });
             //act
@@ -163,7 +164,7 @@ namespace EmployeeWebAPI.UnitTests.CQRS.Commands
 
             //assert
             response.Success.Should().BeFalse();
-            response.Status.Should().Be(Application.Common.ResponseStatus.InvalidQuery);
+            response.Status.Should().Be(Application.Common.ResponseStatus.BusinessLogicError);
         }
 
         [Test]
@@ -272,9 +273,9 @@ namespace EmployeeWebAPI.UnitTests.CQRS.Commands
                     Reason = Reason.DuplicatedUniqueId
                 });
 
-            _employeeRepositoryMock.Setup(x => x.AddAsync(It.Is<Employee>(x => x.Pesel.Value == "75080413758"))).ReturnsAsync(new ExecutionStatus<EmployeeId>()
+            _employeeRepositoryMock.Setup(x => x.Add(It.Is<Employee>(x => x.Pesel.Value == "75080413758"))).ReturnsAsync(new ExecutionStatus<EmployeeId>()
             {
-                ReturnValue = new EmployeeId(),
+                ReturnValue = EmployeeId.NewUniqueId(),
                 Source = Source.Database,
                 Success = true,
                 Reason = Reason.None
@@ -308,9 +309,9 @@ namespace EmployeeWebAPI.UnitTests.CQRS.Commands
                     Reason = Reason.DuplicatedUniqueId
                 });
 
-            _employeeRepositoryMock.Setup(x => x.AddAsync(It.Is<Employee>(x => x.Pesel.Value == "75050757882"))).ReturnsAsync(new ExecutionStatus<EmployeeId>()
+            _employeeRepositoryMock.Setup(x => x.Add(It.Is<Employee>(x => x.Pesel.Value == "75050757882"))).ReturnsAsync(new ExecutionStatus<EmployeeId>()
             {
-                ReturnValue = new EmployeeId(),
+                ReturnValue = EmployeeId.NewUniqueId(),
                 Source = Source.Database,
                 Success = true,
                 Reason = Reason.None
@@ -324,7 +325,7 @@ namespace EmployeeWebAPI.UnitTests.CQRS.Commands
             //assert
             response.Success.Should().BeTrue();
             response.Status.Should().Be(Application.Common.ResponseStatus.Success);
-            response.EmployeeId.Value.Should().NotBe(response2.EmployeeId.Value);
+            response.EmployeeId.Should().NotBe(response2.EmployeeId);
         }
     }
 }

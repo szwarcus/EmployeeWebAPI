@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace EmployeeWebAPI.Application.CQRS.Employee.Queries.GetEmployee
 {
-    //TODO
     public class GetEmployeeQueryHandler : IRequestHandler<GetEmployeeQuery, GetEmployeeQueryResponse>
     {
         private readonly IEmployeeRepository _employeeRepository;
@@ -21,7 +20,7 @@ namespace EmployeeWebAPI.Application.CQRS.Employee.Queries.GetEmployee
 
         public async Task<GetEmployeeQueryResponse> Handle(GetEmployeeQuery request, CancellationToken cancellationToken)
         {
-            var getEmployeeByIdAsync = await _employeeRepository.GetByIdAsync(request.EmployeeId.Value);
+            var getEmployeeByIdAsync = await _employeeRepository.Get(request.Id);
 
             if(getEmployeeByIdAsync.Success)
             {

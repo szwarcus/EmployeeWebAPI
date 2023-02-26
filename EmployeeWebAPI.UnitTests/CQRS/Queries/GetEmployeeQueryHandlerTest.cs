@@ -5,6 +5,7 @@ using EmployeeWebAPI.Application.CQRS.Mapper;
 using EmployeeWebAPI.Domain.Enums;
 using EmployeeWebAPI.Domain.Factories;
 using EmployeeWebAPI.Domain.Status;
+using EmployeeWebAPI.Domain.ValueObjects.Ids;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -29,27 +30,26 @@ namespace EmployeeWebAPI.UnitTests.CQRS.Queries
             {
                 mc.AddProfile(new MappingProfile());
                 mc.AddProfile(new MappingDtos());
+                mc.AddProfile(new MappingIds());
             });
+
             IMapper mapper = mappingConfig.CreateMapper();
             _mapper = mapper;
             _employeeFactory = new EmployeeFactory();
-
             _getEmployeeQueryHandler = new GetEmployeeQueryHandler(_employeeRepositoryMock.Object, _mapper);
         }
 
         [Test]
         public async Task GetEmployeeExecutionTest()
         {
-            var employee = _employeeFactory.CreateEmployee("Jan", "Nowak", "78121293595", new DateTime(1978, 12, 21), Gender.Men);
-
-
             //arrange
+            var employee = _employeeFactory.CreateEmployee("Jan", "Nowak", "78121293595", new DateTime(1978, 12, 21), Gender.Men);
             var query = new GetEmployeeQuery()
             {
-                EmployeeId = employee.Id,
+                Id = employee.Id,
             };
 
-            _employeeRepositoryMock.Setup(x => x.GetByIdAsync(It.Is<Guid>(y => y == employee.Id.Value))).ReturnsAsync(new ExecutionStatus<Domain.Entities.Employee>()
+            _employeeRepositoryMock.Setup(x => x.Get(It.Is<EmployeeId>(y => y == employee.Id))).ReturnsAsync(new ExecutionStatus<Domain.Entities.Employee>()
             {
                 Source = Source.Database,
                 Success = true,
@@ -61,21 +61,20 @@ namespace EmployeeWebAPI.UnitTests.CQRS.Queries
             var response = await _getEmployeeQueryHandler.Handle(query, new System.Threading.CancellationToken());
 
             //assert
-            _employeeRepositoryMock.Verify(x => x.GetByIdAsync(It.IsAny<Guid>()), Times.Once);
+            _employeeRepositoryMock.Verify(x => x.Get(It.IsAny<EmployeeId>()), Times.Once);
         }
 
         [Test]
         public async Task GetEmployeeWithSuccessTest()
         {
-            var employee = _employeeFactory.CreateEmployee("Jan", "Nowak", "78121293595", new DateTime(1978, 12, 21), Gender.Men);
-
             //arrange
+            var employee = _employeeFactory.CreateEmployee("Jan", "Nowak", "78121293595", new DateTime(1978, 12, 21), Gender.Men);
             var query = new GetEmployeeQuery()
             {
-                EmployeeId = employee.Id,
+                Id = employee.Id,
             };
 
-            _employeeRepositoryMock.Setup(x => x.GetByIdAsync(It.Is<Guid>(y => y == employee.Id.Value))).ReturnsAsync(new ExecutionStatus<Domain.Entities.Employee>()
+            _employeeRepositoryMock.Setup(x => x.Get(It.Is<EmployeeId>(y => y == employee.Id))).ReturnsAsync(new ExecutionStatus<Domain.Entities.Employee>()
             {
                 Source = Source.Database,
                 Success = true,
@@ -100,10 +99,10 @@ namespace EmployeeWebAPI.UnitTests.CQRS.Queries
             //arrange
             var query = new GetEmployeeQuery()
             {
-                EmployeeId = new Domain.ValueObjects.Ids.EmployeeId(Guid.NewGuid())             
+                Id = new Domain.ValueObjects.Ids.EmployeeId(Guid.NewGuid())
             };
 
-            _employeeRepositoryMock.Setup(x => x.GetByIdAsync(It.Is<Guid>(y => y == query.EmployeeId.Value))).ReturnsAsync(new ExecutionStatus<Domain.Entities.Employee>()
+            _employeeRepositoryMock.Setup(x => x.Get(It.Is<EmployeeId>(y => y == query.Id))).ReturnsAsync(new ExecutionStatus<Domain.Entities.Employee>()
             {
                 Source = Source.Database,
                 Success = false,
